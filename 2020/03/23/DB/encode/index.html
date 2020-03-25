@@ -23,7 +23,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="Ryan&#39;s Blog"/>
+        <meta property="og:title" content="字符集相关"/>
     
 
     <!--Open Graph Description-->
@@ -36,7 +36,7 @@
 
     <!--Type page-->
     
-        <meta property="og:type" content="website"/>
+        <meta property="og:type" content="article"/>
     
 
     <!--Page Cover-->
@@ -55,7 +55,7 @@
 
     <!-- Title -->
     
-    <title>page - 归档 - Ryan&#39;s Blog</title>
+    <title>字符集相关 - Ryan&#39;s Blog</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
@@ -161,68 +161,113 @@
 </nav>
 
     <!-- Main Content -->
-    
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
 
-<!-- Page Header -->
-<!-- Set your background image for this header in the theme's configuration: index_cover -->
 <header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="site-heading">
-                    <h1>归档</h1>
+                <div class="post-heading">
+                    <h1>字符集相关</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                            Posted by Ryan Chen on
+                        
+                        
+                            2020-03-23
+                        
+                    </span>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+                <div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 post-tags">
+                    
+                        
+
+
+<a href="/tags/Mysql/">#Mysql</a>
+
+
+                    
+                </div>
+                <div class="col-lg-4 col-md-5 post-categories">
+                    
+                        
+
+<a href="/categories/知识积累/">知识积累</a>
+
+                    
+                </div>
             
-                <div class="post-preview">
-    <a href="/2019/11/16/camera/suzhou/">
-        <h1 class="post-title archive">
-            苏州之旅
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-            Posted by Ryan Chen on
-        
-        2019-11-16
-    </p>
-</div>
+
+            <!-- Gallery -->
             
-                <div class="post-preview">
-    <a href="/2018/06/05/camera/osaka/">
-        <h1 class="post-title archive">
-            18年大阪行(未完待续)
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-            Posted by Ryan Chen on
-        
-        2018-06-05
-    </p>
-</div>
-            
-            <div class="archive-before-pagination"></div>
-            <ul class="pager">
-    
-        <li class="previous"><a href="/archives/">&larr;  下一页</a></li>
-    
-    
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul>
+<li><p><code>ASCII</code>字符集</p>
+<p>共收录128个字符，包括空格、标点符号、数字、大小写字母和一些不可见字符。由于总共才128个字符，所以可以使用1个字节来进行编码，我们看一些字符的编码方式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#39;L&#39; -&gt;  01001100（十六进制：0x4C，十进制：76）</span><br><span class="line">&#39;M&#39; -&gt;  01001101（十六进制：0x4D，十进制：77）</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>ISO 8859-1</code>字符集</p>
+<p>共收录256个字符，是在<code>ASCII</code>字符集的基础上又扩充了128个西欧常用字符(包括德法两国的字母)，也可以使用1个字节来进行编码。这个字符集也有一个别名<code>latin1</code>。</p>
+</li>
+<li><p><code>GB2312</code>字符集</p>
+<p>收录了汉字以及拉丁字母、希腊字母、日文平假名及片假名字母、俄语西里尔字母。其中收录汉字6763个，其他文字符号682个。同时这种字符集又兼容<code>ASCII</code>字符集，所以在编码方式上显得有些奇怪：</p>
+<ul>
+<li>如果该字符在<code>ASCII</code>字符集中，则采用1字节编码。</li>
+<li>否则采用2字节编码。</li>
 </ul>
+<p>这种表示一个字符需要的字节数可能不同的编码方式称为<code>变长编码方式</code>。比方说字符串<code>&#39;爱u&#39;</code>，其中<code>&#39;爱&#39;</code>需要用2个字节进行编码，编码后的十六进制表示为<code>0xB0AE</code>，<code>&#39;u&#39;</code>需要用1个字节进行编码，编码后的十六进制表示为<code>0x75</code>，所以拼合起来就是<code>0xB0AE75</code>。</p>
+<blockquote>
+<p>小贴士： 我们怎么区分某个字节代表一个单独的字符还是代表某个字符的一部分呢？别忘了<code>ASCII</code>字符集只收录128个字符，使用0～127就可以表示全部字符，所以如果某个字节是在0～127之内的，就意味着一个字节代表一个单独的字符，否则就是两个字节代表一个单独的字符。</p>
+</blockquote>
+</li>
+<li><p><code>GBK</code>字符集</p>
+<p><code>GBK</code>字符集只是在收录字符范围上对<code>GB2312</code>字符集作了扩充，编码方式上兼容<code>GB2312</code>。</p>
+</li>
+<li><p><code>utf8</code>字符集</p>
+<p>收录地球上能想到的所有字符，而且还在不断扩充。这种字符集兼容<code>ASCII</code>字符集，采用变长编码方式，编码一个字符需要使用1～4个字节，比方说这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#39;L&#39; -&gt;  01001100（十六进制：0x4C）</span><br><span class="line">&#39;啊&#39; -&gt;  111001011001010110001010（十六进制：0xE5958A）</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>小贴士： 其实准确的说，utf8只是Unicode字符集的一种编码方案，Unicode字符集可以采用utf8、utf16、utf32这几种编码方案，utf8使用1～4个字节编码一个字符，utf16使用2个或4个字节编码一个字符，utf32使用4个字节编码一个字符。更详细的Unicode和其编码方案的知识不是本书的重点，大家上网查查哈～ MySQL中并不区分字符集和编码方案的概念，所以后边唠叨的时候把utf8、utf16、utf32都当作一种字符集对待。</p>
+</blockquote>
+</li>
+</ul>
+<p>对于同一个字符，不同字符集也可能有不同的编码方式。比如对于汉字<code>&#39;我&#39;</code>来说，<code>ASCII</code>字符集中根本没有收录这个字符，<code>utf8</code>和<code>gb2312</code>字符集对汉字<code>我</code>的编码方式如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">utf8编码：111001101000100010010001 (3个字节，十六进制表示是：0xE68891)</span><br><span class="line">gb2312编码：1011000010101110 (2个字节，十六进制表示是：0xB0AE)</span><br></pre></td></tr></table></figure>
+
+
+
+                
+            </div>
+
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
+            
         </div>
     </div>
-</div>
-
+</article>
 
     <!-- Footer -->
     <hr />
