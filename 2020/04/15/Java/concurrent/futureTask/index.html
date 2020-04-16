@@ -23,7 +23,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="Ryan&#39;s Blog"/>
+        <meta property="og:title" content="futureTask基本使用"/>
     
 
     <!--Open Graph Description-->
@@ -36,7 +36,7 @@
 
     <!--Type page-->
     
-        <meta property="og:type" content="website"/>
+        <meta property="og:type" content="article"/>
     
 
     <!--Page Cover-->
@@ -55,7 +55,7 @@
 
     <!-- Title -->
     
-    <title>Java - Ryan&#39;s Blog</title>
+    <title>futureTask基本使用 - Ryan&#39;s Blog</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
@@ -161,186 +161,106 @@
 </nav>
 
     <!-- Main Content -->
-    
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
 
-<!-- Page Header -->
-<!-- Set your background image for this header in the theme's configuration: index_cover -->
 <header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="site-heading">
-                    <h1>#Java</h1>
+                <div class="post-heading">
+                    <h1>futureTask基本使用</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                            Posted by Ryan Chen on
+                        
+                        
+                            2020-04-15
+                        
+                    </span>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+                <div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 post-tags">
+                    
+                        
+
+
+<a href="/tags/Java/">#Java</a> <a href="/tags/JUC/">#JUC</a>
+
+
+                    
+                </div>
+                <div class="col-lg-4 col-md-5 post-categories">
+                    
+                        
+
+<a href="/categories/知识积累/">知识积累</a>
+
+                    
+                </div>
             
-                <div class="post-preview">
-    <a href="/2020/04/15/Java/concurrent/futureTask/">
-        <h1 class="post-title archive">
-            futureTask基本使用
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-            Posted by Ryan Chen on
-        
-        2020-04-15
-    </p>
-</div>
+
+            <!-- Gallery -->
             
-                <div class="post-preview">
-    <a href="/2020/04/14/Java/concurrent/ThreadPoolExecutor/">
-        <h1 class="post-title archive">
-            ThreadPoolExecutor相关
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-            Posted by Ryan Chen on
-        
-        2020-04-14
-    </p>
-</div>
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <h1 id="1-FutureTask-简介"><a href="#1-FutureTask-简介" class="headerlink" title="1.FutureTask 简介"></a>1.FutureTask 简介</h1><p>在 Executors 框架体系中，FutureTask 用来表示可获取结果的异步任务。FutureTask 实现了 Future 接口，FutureTask 提供了启动和取消异步任务，查询异步任务是否计算结束以及获取最终的异步任务的结果的一些常用的方法。通过<code>get()</code>方法来获取异步任务的结果，但是会阻塞当前线程直至异步任务执行结束。一旦任务执行结束，任务不能重新启动或取消，除非调用<code>runAndReset()</code>方法。在 FutureTask 的源码中为其定义了这些状态：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">private static final int NEW          &#x3D; 0;</span><br><span class="line">private static final int COMPLETING   &#x3D; 1;</span><br><span class="line">private static final int NORMAL       &#x3D; 2;</span><br><span class="line">private static final int EXCEPTIONAL  &#x3D; 3;</span><br><span class="line">private static final int CANCELLED    &#x3D; 4;</span><br><span class="line">private static final int INTERRUPTING &#x3D; 5;</span><br><span class="line">private static final int INTERRUPTED  &#x3D; 6;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>另外，在《java 并发编程的艺术》一书，作者根据 FutureTask.run()方法的执行的时机，FutureTask 分为了 3 种状态：</p>
+<ol>
+<li><strong>未启动</strong>。FutureTask.run()方法还没有被执行之前，FutureTask 处于未启动状态。当创建一个 FutureTask，还没有执行 FutureTask.run()方法之前，FutureTask 处于未启动状态。</li>
+<li><strong>已启动</strong>。FutureTask.run()方法被执行的过程中，FutureTask 处于已启动状态。</li>
+<li><strong>已完成</strong>。FutureTask.run()方法执行结束，或者调用 FutureTask.cancel(…)方法取消任务，或者在执行任务期间抛出异常，这些情况都称之为 FutureTask 的已完成状态。</li>
+</ol>
+<p>下图总结了 FutureTask 的状态变化的过程：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/5/6/16334a72fd345345?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="FutureTask状态迁移图.jpg">FutureTask状态迁移图.jpg</p>
+<p>由于 FutureTask 具有这三种状态，因此执行 FutureTask 的 get 方法和 cancel 方法，当前处于不同的状态对应的结果也是大不相同。这里对 get 方法和 cancel 方法做个总结：</p>
+<blockquote>
+<p>get 方法</p>
+</blockquote>
+<p>当 FutureTask 处于未启动或已启动状态时，执行 FutureTask.get()方法将导致调用线程阻塞。如果 FutureTask 处于已完成状态，调用 FutureTask.get()方法将导致调用线程立即返回结果或者抛出异常</p>
+<blockquote>
+<p>cancel 方法</p>
+</blockquote>
+<p>当 FutureTask 处于<strong>未启动状态</strong>时，执行 FutureTask.cancel()方法将此任务永远不会执行；</p>
+<p>当 FutureTask 处于<strong>已启动状态</strong>时，执行 FutureTask.cancel(true)方法将以中断线程的方式来阻止任务继续进行，如果执行 FutureTask.cancel(false)将不会对正在执行任务的线程有任何影响；</p>
+<p>当<strong>FutureTask</strong>处于已完成状态时，执行 FutureTask.cancel(…)方法将返回 false。</p>
+<p>对 Future 的 get()方法和 cancel()方法用下图进行总结</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/5/6/16334a72fd899d43?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="FutureTask的get和cancel的执行示意图.jpg">FutureTask的get和cancel的执行示意图.jpg</p>
+<h1 id="2-FutureTask-的基本使用"><a href="#2-FutureTask-的基本使用" class="headerlink" title="2. FutureTask 的基本使用"></a>2. FutureTask 的基本使用</h1><p>FutureTask 除了实现 Future 接口外，还实现了 Runnable 接口。因此，FutureTask 可以交给 Executor 执行，也可以由调用的线程直接执行（FutureTask.run()）。另外，FutureTask 的获取也可以通过 ExecutorService.submit()方法返回一个 FutureTask 对象，然后在通过 FutureTask.get()或者 FutureTask.cancel 方法。</p>
+<p><strong>应用场景：</strong>当一个线程需要等待另一个线程把某个任务执行完后它才能继续执行，此时可以使用 FutureTask。假设有多个线程执行若干任务，每个任务最多只能被执行一次。当多个线程试图执行同一个任务时，只允许一个线程执行任务，其他线程需要等待这个任务执行完后才能继续执行。</p>
+<p>作者：你听___<br>链接：<a href="https://juejin.im/post/5aeec249f265da0b886d5101" target="_blank" rel="noopener">https://juejin.im/post/5aeec249f265da0b886d5101</a><br>来源：掘金<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+
+
+                
+            </div>
+
+            <!-- Comments -->
             
-                <div class="post-preview">
-    <a href="/2020/04/14/Java/concurrent/ArrayLinkedBlockingQuene/">
-        <h1 class="post-title archive">
-            ArrayBlockingQueue和LinkedBlockingQueue
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-            Posted by Ryan Chen on
-        
-        2020-04-14
-    </p>
-</div>
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
             
-                <div class="post-preview">
-    <a href="/2020/04/13/Java/concurrent/concurrentLinkedQuene/">
-        <h1 class="post-title archive">
-            concurrentLinkedQuene源码
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-            Posted by Ryan Chen on
-        
-        2020-04-13
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2020/04/09/Java/concurrent/condition/">
-        <h1 class="post-title archive">
-            Condition的await和signal
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-            Posted by Ryan Chen on
-        
-        2020-04-09
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2020/04/02/Java/concurrent/reetrantlock/">
-        <h1 class="post-title archive">
-            ReentrantLock以及其他同步组件
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-            Posted by Ryan Chen on
-        
-        2020-04-02
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2020/04/01/Java/concurrent/AQS/">
-        <h1 class="post-title archive">
-            AQS相关
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-            Posted by Ryan Chen on
-        
-        2020-04-01
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2020/03/31/Java/concurrent/duoxiancheng/">
-        <h1 class="post-title archive">
-            Java多线程的一些知识点(估计很长)
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-            Posted by Ryan Chen on
-        
-        2020-03-31
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2020/03/13/Java/commonpools/">
-        <h1 class="post-title archive">
-            common-pools2常见连接池配置参数
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-            Posted by Ryan Chen on
-        
-        2020-03-13
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2020/03/05/other/intellij/">
-        <h1 class="post-title archive">
-            Intellij破解方法(备忘)
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-            Posted by Ryan Chen on
-        
-        2020-03-05
-    </p>
-</div>
-            
-            <div class="archive-before-pagination"></div>
-            <ul class="pager">
-    
-    
-</ul>
         </div>
     </div>
-</div>
-
+</article>
 
     <!-- Footer -->
     <hr />
