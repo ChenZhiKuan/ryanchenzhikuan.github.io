@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <!--Description-->
+
+    
+
+    
+        <meta name="description" content="随缘更新的博客,就当做是备忘录了"/>
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="Ryan Chen"/>
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="futureTask基本使用"/>
+    
+
+    <!--Open Graph Description-->
+    
+        <meta property="og:description" content="随缘更新的博客,就当做是备忘录了"/>
+    
+
+    <!--Open Graph Site Name-->
+        <meta property="og:site_name" content="Ryan&#39;s Blog"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article"/>
+    
+
+    <!--Page Cover-->
+    
+    
+        <meta property="og:image" content="http://yoursite.com/img/home-bg.jpg"/>
+    
+
+        <meta name="twitter:card" content="summary_large_image"/>
+
+    
+
+    
+        <meta name="twitter:image" content="http://yoursite.com/img/home-bg.jpg"/>
+    
+
+    <!-- Title -->
+    
+    <title>futureTask基本使用 - Ryan&#39;s Blog</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css"/>
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css"/>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet"/>
+
+    <!-- Google Analytics -->
+    
+
+
+    <!-- favicon -->
+    
+    <link rel="icon" href="/img/favicon.png"/>
+    
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+
+    <!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Let It Be</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/">
+                            
+                                Home
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/archives">
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/tags">
+                            
+                                Tags
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories">
+                            
+                                Categories
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/about">
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>futureTask基本使用</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                            Posted by Ryan Chen on
+                        
+                        
+                            2022-04-15
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+                <div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 post-tags">
+                    
+                        
+
+
+<a href="/tags/Java/">#Java</a> <a href="/tags/JUC/">#JUC</a>
+
+
+                    
+                </div>
+                <div class="col-lg-4 col-md-5 post-categories">
+                    
+                        
+
+<a href="/categories/知识积累/">知识积累</a>
+
+                    
+                </div>
+            
+
+            <!-- Gallery -->
+            
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <h1 id="1-FutureTask-简介"><a href="#1-FutureTask-简介" class="headerlink" title="1.FutureTask 简介"></a>1.FutureTask 简介</h1><p>在 Executors 框架体系中，FutureTask 用来表示可获取结果的异步任务。FutureTask 实现了 Future 接口，FutureTask 提供了启动和取消异步任务，查询异步任务是否计算结束以及获取最终的异步任务的结果的一些常用的方法。通过<code>get()</code>方法来获取异步任务的结果，但是会阻塞当前线程直至异步任务执行结束。一旦任务执行结束，任务不能重新启动或取消，除非调用<code>runAndReset()</code>方法。在 FutureTask 的源码中为其定义了这些状态：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">private static final int NEW          &#x3D; 0;</span><br><span class="line">private static final int COMPLETING   &#x3D; 1;</span><br><span class="line">private static final int NORMAL       &#x3D; 2;</span><br><span class="line">private static final int EXCEPTIONAL  &#x3D; 3;</span><br><span class="line">private static final int CANCELLED    &#x3D; 4;</span><br><span class="line">private static final int INTERRUPTING &#x3D; 5;</span><br><span class="line">private static final int INTERRUPTED  &#x3D; 6;</span><br></pre></td></tr></table></figure>
+
+<p>另外，在《java 并发编程的艺术》一书，作者根据 FutureTask.run()方法的执行的时机，FutureTask 分为了 3 种状态：</p>
+<ol>
+<li><strong>未启动</strong>。FutureTask.run()方法还没有被执行之前，FutureTask 处于未启动状态。当创建一个 FutureTask，还没有执行 FutureTask.run()方法之前，FutureTask 处于未启动状态。</li>
+<li><strong>已启动</strong>。FutureTask.run()方法被执行的过程中，FutureTask 处于已启动状态。</li>
+<li><strong>已完成</strong>。FutureTask.run()方法执行结束，或者调用 FutureTask.cancel(…)方法取消任务，或者在执行任务期间抛出异常，这些情况都称之为 FutureTask 的已完成状态。</li>
+</ol>
+<p>下图总结了 FutureTask 的状态变化的过程：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/5/6/16334a72fd345345?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="FutureTask状态迁移图.jpg">FutureTask状态迁移图.jpg</p>
+<p>由于 FutureTask 具有这三种状态，因此执行 FutureTask 的 get 方法和 cancel 方法，当前处于不同的状态对应的结果也是大不相同。这里对 get 方法和 cancel 方法做个总结：</p>
+<blockquote>
+<p>get 方法</p>
+</blockquote>
+<p>当 FutureTask 处于未启动或已启动状态时，执行 FutureTask.get()方法将导致调用线程阻塞。如果 FutureTask 处于已完成状态，调用 FutureTask.get()方法将导致调用线程立即返回结果或者抛出异常</p>
+<blockquote>
+<p>cancel 方法</p>
+</blockquote>
+<p>当 FutureTask 处于<strong>未启动状态</strong>时，执行 FutureTask.cancel()方法将此任务永远不会执行；</p>
+<p>当 FutureTask 处于<strong>已启动状态</strong>时，执行 FutureTask.cancel(true)方法将以中断线程的方式来阻止任务继续进行，如果执行 FutureTask.cancel(false)将不会对正在执行任务的线程有任何影响；</p>
+<p>当<strong>FutureTask</strong>处于已完成状态时，执行 FutureTask.cancel(…)方法将返回 false。</p>
+<p>对 Future 的 get()方法和 cancel()方法用下图进行总结</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/5/6/16334a72fd899d43?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="FutureTask的get和cancel的执行示意图.jpg">FutureTask的get和cancel的执行示意图.jpg</p>
+<h1 id="2-FutureTask-的基本使用"><a href="#2-FutureTask-的基本使用" class="headerlink" title="2. FutureTask 的基本使用"></a>2. FutureTask 的基本使用</h1><p>FutureTask 除了实现 Future 接口外，还实现了 Runnable 接口。因此，FutureTask 可以交给 Executor 执行，也可以由调用的线程直接执行（FutureTask.run()）。另外，FutureTask 的获取也可以通过 ExecutorService.submit()方法返回一个 FutureTask 对象，然后在通过 FutureTask.get()或者 FutureTask.cancel 方法。</p>
+<p><strong>应用场景：</strong>当一个线程需要等待另一个线程把某个任务执行完后它才能继续执行，此时可以使用 FutureTask。假设有多个线程执行若干任务，每个任务最多只能被执行一次。当多个线程试图执行同一个任务时，只允许一个线程执行任务，其他线程需要等待这个任务执行完后才能继续执行。</p>
+<p>作者：你听___<br>链接：<a href="https://juejin.im/post/5aeec249f265da0b886d5101" target="_blank" rel="noopener">https://juejin.im/post/5aeec249f265da0b886d5101</a><br>来源：掘金<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+
+
+                
+            </div>
+
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
+            
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+    <hr />
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                        <li>
+                            <a href="https://mobile.twitter.com/ZhikuanCccccc" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+                        <li>
+                            <a href="https://500px.com/kaido4894" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-500px fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+                        <li>
+                            <a href="https://github.com/ryanchenzhikuan/ryanchenzhikuan.github.io" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+                        <li>
+                            <a href="https://www.instagram.com/ryanchenzk/" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+                        <li>
+                            <a href="mailto:kaido4894@gmail.com" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+                </ul>
+                <p class="copyright text-muted">&copy; 2022 Ryan Chen<br></p>
+                <p class="copyright text-muted">Original Theme <a target="_blank" href="http://startbootstrap.com/template-overviews/clean-blog/">Clean Blog</a> from <a href="http://startbootstrap.com/" target="_blank">Start Bootstrap</a></p>
+                <p class="copyright text-muted">Adapted for <a target="_blank" href="https://hexo.io/">Hexo</a> by <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <!-- After footer scripts -->
+    
+<!-- jQuery -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>

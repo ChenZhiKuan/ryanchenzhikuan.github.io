@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <!--Description-->
+
+    
+
+    
+        <meta name="description" content="随缘更新的博客,就当做是备忘录了"/>
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="Ryan Chen"/>
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="Springboot源码一些总结"/>
+    
+
+    <!--Open Graph Description-->
+    
+        <meta property="og:description" content="随缘更新的博客,就当做是备忘录了"/>
+    
+
+    <!--Open Graph Site Name-->
+        <meta property="og:site_name" content="Ryan&#39;s Blog"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article"/>
+    
+
+    <!--Page Cover-->
+    
+    
+        <meta property="og:image" content="http://yoursite.com/img/home-bg.jpg"/>
+    
+
+        <meta name="twitter:card" content="summary_large_image"/>
+
+    
+
+    
+        <meta name="twitter:image" content="http://yoursite.com/img/home-bg.jpg"/>
+    
+
+    <!-- Title -->
+    
+    <title>Springboot源码一些总结 - Ryan&#39;s Blog</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css"/>
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css"/>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet"/>
+
+    <!-- Google Analytics -->
+    
+
+
+    <!-- favicon -->
+    
+    <link rel="icon" href="/img/favicon.png"/>
+    
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+
+    <!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Let It Be</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/">
+                            
+                                Home
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/archives">
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/tags">
+                            
+                                Tags
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories">
+                            
+                                Categories
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/about">
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Springboot源码一些总结</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                            Posted by Ryan Chen on
+                        
+                        
+                            2022-04-24
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+                <div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 post-tags">
+                    
+                        
+
+
+<a href="/tags/Java/">#Java</a> <a href="/tags/SpringBoot/">#SpringBoot</a>
+
+
+                    
+                </div>
+                <div class="col-lg-4 col-md-5 post-categories">
+                    
+                        
+
+<a href="/categories/源码分析/">源码分析</a>
+
+                    
+                </div>
+            
+
+            <!-- Gallery -->
+            
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <p>1.@SpringBootApplication</p>
+<p><code>@SpringBootApplication</code>注解来自 SpringBoot1.2.0，其实在 SpringBoot1.1 及以前的版本，在启动类上标注的注解应该是三个：<code>@Configuration</code> + <code>@EnableAutoConfiguration</code> + <code>@ComponentScan</code>，只不过从1.2以后 SpringBoot 帮我们整合起来了。</p>
+<p>2.@ComponentScan</p>
+<p>SpringBootApplication注解中的ComponentScan指定了两个过滤条件：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ComponentScan</span>(excludeFilters = &#123; <span class="meta">@Filter</span>(type = FilterType.CUSTOM, classes = TypeExcludeFilter<span class="class">.<span class="keyword">class</span>),</span></span><br><span class="line"><span class="class">		@<span class="title">Filter</span>(<span class="title">type</span> </span>= FilterType.CUSTOM, classes = AutoConfigurationExcludeFilter<span class="class">.<span class="keyword">class</span>) &#125;)</span></span><br></pre></td></tr></table></figure>
+
+<p>TypeExcludeFilter是提供了一种扩展机制，能让我们<strong>向IOC容器中注册一些自定义的组件过滤器，以在包扫描的过程中过滤它们</strong>。</p>
+<p>这种Filter的核心方法是 <code>match</code> 方法，它实现了过滤的判断逻辑：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public boolean match(MetadataReader metadataReader, MetadataReaderFactory metadataReaderFactory)</span><br><span class="line">        throws IOException &#123;</span><br><span class="line">    if (this.beanFactory instanceof ListableBeanFactory &amp;&amp; getClass() &#x3D;&#x3D; TypeExcludeFilter.class) &#123;</span><br><span class="line">        Collection&lt;TypeExcludeFilter&gt; delegates &#x3D; ((ListableBeanFactory) this.beanFactory)</span><br><span class="line">                .getBeansOfType(TypeExcludeFilter.class).values();</span><br><span class="line">        for (TypeExcludeFilter delegate : delegates) &#123;</span><br><span class="line">            if (delegate.match(metadataReader, metadataReaderFactory)) &#123;</span><br><span class="line">                return true;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意看if结构体中的第一句，它会从 <code>BeanFactory</code> （可以暂时理解成IOC容器）中获取所有类型为 <code>TypeExcludeFilter</code> 的组件，去执行自定义的过滤方法。</p>
+<p>由此可见，<code>TypeExcludeFilter</code> 的作用是做<strong>扩展的组件过滤</strong>。</p>
+<p>AutoConfigurationExcludeFilter跟自动配置相关：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public boolean match(MetadataReader metadataReader, MetadataReaderFactory metadataReaderFactory)</span><br><span class="line">        throws IOException &#123;</span><br><span class="line">    return isConfiguration(metadataReader) &amp;&amp; isAutoConfiguration(metadataReader);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private boolean isConfiguration(MetadataReader metadataReader) &#123;</span><br><span class="line">    return metadataReader.getAnnotationMetadata().isAnnotated(Configuration.class.getName());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private boolean isAutoConfiguration(MetadataReader metadataReader) &#123;</span><br><span class="line">    return getAutoConfigurations().contains(metadataReader.getClassMetadata().getClassName());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">protected List&lt;String&gt; getAutoConfigurations() &#123;</span><br><span class="line">    if (this.autoConfigurations &#x3D;&#x3D; null) &#123;</span><br><span class="line">        this.autoConfigurations &#x3D; SpringFactoriesLoader.loadFactoryNames(EnableAutoConfiguration.class,</span><br><span class="line">                this.beanClassLoader);</span><br><span class="line">    &#125;</span><br><span class="line">    return this.autoConfigurations;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>它的 <code>match</code> 方法要判断两个部分：<strong>是否是一个配置类，是否是一个自动配置类</strong>。其实光从方法名上也就看出来了，下面的方法是其调用实现，里面有一个很关键的机制：<code>SpringFactoriesLoader.loadFactoryNames</code></p>
+<p>3.@SpringBootConfiguration</p>
+<p>@SpringBootConfiguration被 <code>@Configuration</code> 标注，说明它实际上是标注配置类的，而且是标注主启动类的。</p>
+<p><code>@Configuration</code> 可标注配置类，<code>@SpringBootConfiguration</code> 并没有对其做实质性扩展。</p>
+<p>4.@EnableAutoConfiguration</p>
+<p>SpringBoot的自动配置完全由 <code>@EnableAutoConfiguration</code> 开启。</p>
+<p><code>@EnableAutoConfiguration</code> 的内容：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@AutoConfigurationPackage</span></span><br><span class="line"><span class="meta">@Import</span>(AutoConfigurationImportSelector<span class="class">.<span class="keyword">class</span>)</span></span><br><span class="line"><span class="class"><span class="title">public</span> @<span class="title">interface</span> <span class="title">EnableAutoConfiguration</span></span></span><br></pre></td></tr></table></figure>
+
+<p>4.1@AutoConfigurationPackage</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Import</span>(AutoConfigurationPackages.Registrar<span class="class">.<span class="keyword">class</span>)</span></span><br><span class="line"><span class="class"><span class="title">public</span> @<span class="title">interface</span> <span class="title">AutoConfigurationPackage</span></span></span><br></pre></td></tr></table></figure>
+
+<p>主启动类必须放在所有自定义组件的包的最外层，以保证Spring能扫描到它们。</p>
+<p>它的实现原理是在注解上标注了 <code>@Import</code>，导入了一个 <code>AutoConfigurationPackages.Registrar</code> 。</p>
+<h4 id="AutoConfigurationPackages-Registrar"><a href="#AutoConfigurationPackages-Registrar" class="headerlink" title="AutoConfigurationPackages.Registrar"></a>AutoConfigurationPackages.Registrar</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * &#123;<span class="doctag">@link</span> ImportBeanDefinitionRegistrar&#125; to store the base package from the importing</span></span><br><span class="line"><span class="comment"> * configuration.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Registrar</span> <span class="keyword">implements</span> <span class="title">ImportBeanDefinitionRegistrar</span>, <span class="title">DeterminableImports</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">registerBeanDefinitions</span><span class="params">(AnnotationMetadata metadata, BeanDefinitionRegistry registry)</span> </span>&#123;</span><br><span class="line">        register(registry, <span class="keyword">new</span> PackageImport(metadata).getPackageName());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Set&lt;Object&gt; <span class="title">determineImports</span><span class="params">(AnnotationMetadata metadata)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Collections.singleton(<span class="keyword">new</span> PackageImport(metadata));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>文档注释原文翻译：</p>
+<blockquote>
+<p><code>ImportBeanDefinitionRegistrar</code> to store the base package from the importing configuration.</p>
+<p>用于保存导入的配置类所在的根包。</p>
+</blockquote>
+<p>很明显，它就是实现把主配置所在根包保存起来以便后期扫描用的。</p>
+<p><code>Registrar</code> 实现了 <code>ImportBeanDefinitionRegistrar</code> 接口，它向IOC容器中要手动注册组件。</p>
+<p>在重写的 <code>registerBeanDefinitions</code> 方法中，它要调用外部类 <code>AutoConfigurationPackages</code> 的register方法。</p>
+<p>且不说这个方法的具体作用，看传入的参数：<strong>new PackageImport(metadata).getPackageName()</strong></p>
+<p>它实例化的 <code>PackageImport</code> 对象的构造方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">PackageImport(AnnotationMetadata metadata) &#123;</span><br><span class="line">    this.packageName &#x3D; ClassUtils.getPackageName(metadata.getClassName());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>它取了一个 metadata 的所在包名。那 metadata 又是什么呢？</p>
+<p>翻看 <code>ImportBeanDefinitionRegistrar</code>的文档注释：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public interface ImportBeanDefinitionRegistrar &#123;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * ......</span><br><span class="line">     * @param importingClassMetadata annotation metadata of the importing class</span><br><span class="line">     * @param registry current bean definition registry</span><br><span class="line">     *&#x2F;</span><br><span class="line">    void registerBeanDefinitions(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意 <strong>importingClassMetadata</strong> 的参数说明：<strong>导入类的注解元数据</strong>。</p>
+<p>它实际代表的是被 <code>@Import</code> 标记的类的信息。</p>
+<p>那在 SpringBoot 的主启动类中，被标记的肯定就是最开始案例里的 主启动类</p>
+<p>也就是说它是主启动类 的类信息，那获取它的包名就是获取主启动类的所在包。</p>
+<h4 id="register方法"><a href="#register方法" class="headerlink" title="register方法"></a>register方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String BEAN = AutoConfigurationPackages<span class="class">.<span class="keyword">class</span>.<span class="title">getName</span>()</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">register</span><span class="params">(BeanDefinitionRegistry registry, String... packageNames)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 判断 BeanFactory 中是否包含 AutoConfigurationPackages</span></span><br><span class="line">    <span class="keyword">if</span> (registry.containsBeanDefinition(BEAN)) &#123;</span><br><span class="line">        BeanDefinition beanDefinition = registry.getBeanDefinition(BEAN);</span><br><span class="line">        ConstructorArgumentValues constructorArguments = beanDefinition.getConstructorArgumentValues();</span><br><span class="line">        <span class="comment">// addBasePackages：添加根包扫描包</span></span><br><span class="line">        constructorArguments.addIndexedArgumentValue(<span class="number">0</span>, addBasePackages(constructorArguments, packageNames));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        GenericBeanDefinition beanDefinition = <span class="keyword">new</span> GenericBeanDefinition();</span><br><span class="line">        beanDefinition.setBeanClass(BasePackages<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">        beanDefinition.getConstructorArgumentValues().addIndexedArgumentValue(<span class="number">0</span>, packageNames);</span><br><span class="line">        beanDefinition.setRole(BeanDefinition.ROLE_INFRASTRUCTURE);</span><br><span class="line">        registry.registerBeanDefinition(BEAN, beanDefinition);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>划重点：它要判断当前IOC容器中是否包含 <code>AutoConfigurationPackages</code> 。如果有，就会拿到刚才传入的包名，设置到一个 <strong>basePackage</strong> 里面！basePackage 的意义很明显是根包。</p>
+<p>换句话说，它要<strong>取主启动类所在包及子包下的组件</strong>。</p>
+<p>不过，在实际Debug时，并不是走的上面流程，因为 <code>AutoConfigurationPackages</code> 对应的 Bean 还没有创建，所以走的下面的 else 部分，直接把主启动类所在包放入 <code>BasePackages</code> 中，与上面 if 结构中最后一句一样，都是调用 <code>addIndexedArgumentValue</code> 方法。那这个 <code>BasePackages</code> 中设置了构造器参数，一定会有对应的成员：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">BasePackages</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> List&lt;String&gt; packages;</span><br><span class="line"></span><br><span class="line">    BasePackages(String... names) &#123;</span><br><span class="line">        List&lt;String&gt; packages = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (String name : names) &#123;</span><br><span class="line">            <span class="keyword">if</span> (StringUtils.hasText(name)) &#123;</span><br><span class="line">                packages.add(name);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">this</span>.packages = packages;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>它有一个专门的成员存放这些 basePackage 。</p>
+<p>小结：</p>
+<ol>
+<li>SpringFramework 提供了模式注解、<code>@EnableXXX</code> + <code>@Import</code> 的组合手动装配。</li>
+<li><code>@SpringBootApplication</code> 标注的主启动类所在包会被视为扫描包的根包。</li>
+</ol>
+
+
+                
+            </div>
+
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
+            
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+    <hr />
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                        <li>
+                            <a href="https://mobile.twitter.com/ZhikuanCccccc" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+                        <li>
+                            <a href="https://500px.com/kaido4894" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-500px fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+                        <li>
+                            <a href="https://github.com/ryanchenzhikuan/ryanchenzhikuan.github.io" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+                        <li>
+                            <a href="https://www.instagram.com/ryanchenzk/" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+                        <li>
+                            <a href="mailto:kaido4894@gmail.com" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+                </ul>
+                <p class="copyright text-muted">&copy; 2022 Ryan Chen<br></p>
+                <p class="copyright text-muted">Original Theme <a target="_blank" href="http://startbootstrap.com/template-overviews/clean-blog/">Clean Blog</a> from <a href="http://startbootstrap.com/" target="_blank">Start Bootstrap</a></p>
+                <p class="copyright text-muted">Adapted for <a target="_blank" href="https://hexo.io/">Hexo</a> by <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <!-- After footer scripts -->
+    
+<!-- jQuery -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>
